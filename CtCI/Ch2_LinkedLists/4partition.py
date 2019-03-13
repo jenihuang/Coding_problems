@@ -1,0 +1,1 @@
+'''have a pointer at head and tail, insert before head or after tail'''
