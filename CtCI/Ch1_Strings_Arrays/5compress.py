@@ -1,28 +1,35 @@
 import unittest
 
 
-def compress_string(chars):
-    '''return compressed string or original string if longer'''
-    # O(n) time, O(1) space
+def compress_string(message):
+    '''returns compressed string given a string input'''
 
-    compressed = ''
-    count = 1
+    # start a string counter for consecutive characters seen
+    consecutive = 1
+    result_list = []
 
-    for i in range(len(chars) - 1):
-        if chars[i] == chars[i + 1]:
-            count += 1
+    # iterate through the input string and compare current char to next char
+    # increment consecutive as needed and append to result_list when next char is no longer the same
+    for i in range(len(message) - 1):
+        if message[i] == message[i + 1]:
+            consecutive += 1
         else:
-            compressed += chars[i]
-            compressed += str(count)
-            count = 1
+            result_list.append(message[i])
+            if consecutive > 1:
+                result_list.append(str(consecutive))
+            consecutive = 1
 
-    compressed += chars[i]
-    compressed += str(count)
+    # check edge case if last two letters were the same
+    if message[-1] == message[-2]:
+        result_list.append(message[i])
+        result_list.append(str(consecutive))
 
-    if len(chars) <= len(compressed):
-        return chars
-    else:
-        return compressed
+    # check edge case if last letter is different
+    if consecutive == 1:
+        result_list.append(message[-1])
+
+    result_str = ''.join(result_list)
+    return result_str
 
 
 class Test(unittest.TestCase):

@@ -1,9 +1,12 @@
 class Node:
 
-    def __init__(self, value, nextNode=None, prev=None):
+    def __init__(self, value=None, nextNode=None, prev=None):
         self.value = value
         self.next = nextNode
         self.prev = prev
+
+    def __str__(self):
+        return str(self.value)
 
 
 class LinkedList:
@@ -14,6 +17,16 @@ class LinkedList:
         self.length = 0
         if values:
             self.add_many(values)
+
+    def __iter__(self):
+        current = self.head
+        while current:
+            yield current
+            current = current.next
+
+    def __str__(self):
+        values = [str(x) for x in self]
+        return ' -> '.join(values)
 
     def add(self, value):
 
